@@ -1,30 +1,38 @@
 package com.telran.contacts;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 
 public class LoginTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        //login tab not present
-        if (!isElementPresent(By.cssSelector(".login_login__3EHKB"))) {
-            click(By.xpath("//button[contains(.,'Sign Out')]"));
+        //click on login tab
+        clickOnLoginTab();
+        if (!isRegistrationLoginFormPresent()) {
+            clickOnSignOutButton();
         }
     }
 
-    @Test
+    @Test(priority = 1)
     public void loginRegisteredUserPositiveTest() {
-        //click on login tab
-        click(By.xpath("//a[contains(.,'LOGIN')]"));
-        //fill registration form
+        //fill login form
         fillRegistrationLoginForm("korner_15@mail.com", "Sd3567890$");
-        //click on login button
-        click(By.xpath("//button[contains(.,' Login')]"));
+        //click on Login button
+        clickOnLoginButton();
         //Assert: User logged in
-        Assert.assertTrue(isElementPresent(By.xpath("a[contains(.,'CONTACTS')]")));
+        Assert.assertTrue(isContactTabPresent());
     }
-    ////a[contains(.,'CONTACTS')]
+
+    @Test(priority = 2)
+    public void loginRegisteredUserNegativeTest() {
+        //click(By.xpath("//a[contains(.,'LOGIN')]"));
+        fillRegistrationLoginForm("korner_15@mail.com", "Sd3567890");
+        clickOnLoginButton();
+        Assert.assertTrue(isAlertPresent());
+        // assert 'Login Failed with code 400' displayed (homework)
+    }
+
 }
