@@ -8,6 +8,14 @@ public class Contact {
     private  String address;
     private  String desc;
 
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public Contact setName(String name) {
         this.name = name;
         return this;

@@ -2,6 +2,8 @@ package com.telran.contacts.fw;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,6 +15,12 @@ public class ApplicationManager  {
     ContactHelper contact;
     HeaderHelper header;
     HomePageHelper homePage;
+
+    String browser;
+
+    public ApplicationManager(String browser) {
+        this.browser = browser;
+    }
 
     public HomePageHelper getHomePage() {
         return homePage;
@@ -32,7 +40,11 @@ public class ApplicationManager  {
 
 
     public void init() {
-        driver = new ChromeDriver();
+        if (browser.equals(BrowserType.CHROME)) {
+            driver = new ChromeDriver();
+        } else if (browser.equals(BrowserType.FIREFOX)){
+            driver = new FirefoxDriver();
+        }
         driver.get("https://contacts-app.tobbymarshall815.vercel.app/home");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

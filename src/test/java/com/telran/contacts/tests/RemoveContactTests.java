@@ -13,7 +13,8 @@ public class RemoveContactTests extends TestBase {
             app.getUser().login();
         }
         int i = (int) ((System.currentTimeMillis()/ 1000) % 3600);
-        app.getContact().addContact(new Contact().setName("Korn").setLastname("Eva").setPhone("12345" + i).setEmail("eva" + i + "@gmail.com")
+        app.getContact().addContact(new Contact().setName("Korn").setLastname("Eva").setPhone("12345" + i)
+                .setEmail("eva" + i + "@gmail.com")
                 .setAddress("Kiev").setDesc("butterfly"));
     }
 
@@ -26,6 +27,16 @@ public class RemoveContactTests extends TestBase {
         int sizeAfter = app.getContact().sizeOfContacts();
         System.out.println(sizeAfter);
         Assert.assertEquals(sizeAfter, sizeBefore-1);
+    }
+
+    @Test
+    public void removeAllContactTest() {
+        int i = (int) ((System.currentTimeMillis() / 1000) % 3600);
+        app.getContact().addContact(new Contact().setName("Korn").setLastname("Eva").setPhone("12345" + i)
+                .setEmail("eva" + i + "@gmail.com")
+                .setAddress("Kiev").setDesc("butterfly"));
+        app.getContact().removeAllContacts();
+        Assert.assertTrue(app.getContact().isContactNotHere());
     }
 
 

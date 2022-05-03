@@ -30,9 +30,10 @@ public class ContactHelper extends HelperBase{
     }
 
     public void removeContact() {
-        if(!isContactListEmpty()) {
+        if (!isContactListEmpty()) {
             click(By.cssSelector(".contact-item_card__2SOIM"));
             click(By.xpath("//*[text()='Remove']"));
+            pause(2000);
         }
     }
 
@@ -50,5 +51,29 @@ public class ContactHelper extends HelperBase{
         type(By.cssSelector("input:nth-child(6)"), contact.getDesc());
 
         click(By.cssSelector(".add_form__2rsm2 button"));
+    }
+
+    public boolean isSaveBtnPresent() {
+        return isElementPresent(By.cssSelector(".add_form__2rsm2 button"));
+    }
+
+    public void removeAllContacts() {
+        while (driver.findElements(By.cssSelector(".contact-item_card__2SOIM")).size()!=0) {
+            removeContact();
+        }
+    }
+
+    public boolean isContactNotHere() {
+        return isTextContainsInElement(By.cssSelector(".contact-page_message__2qafk"), 10,"No Contacts here!");
+    }
+
+    public boolean isContactCreatedByPhone(String phone) {
+
+        List<WebElement> list = driver.findElements(By.cssSelector("h3"));
+        for (WebElement el: list){
+            if (el.getText().equals(phone))
+                return true;
+        }
+        return false;
     }
 }
