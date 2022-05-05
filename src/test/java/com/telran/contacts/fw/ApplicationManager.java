@@ -4,12 +4,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager  {
 
     public WebDriver driver;
+
 
     UserHelper user;
     ContactHelper contact;
@@ -44,7 +46,7 @@ public class ApplicationManager  {
             driver = new ChromeDriver();
         } else if (browser.equals(BrowserType.FIREFOX)){
             driver = new FirefoxDriver();
-        }
+            }
         driver.get("https://contacts-app.tobbymarshall815.vercel.app/home");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -53,6 +55,7 @@ public class ApplicationManager  {
         contact = new ContactHelper(driver);
         header = new HeaderHelper(driver);
         homePage = new HomePageHelper(driver);
+
     }
 
     public void stop() {

@@ -5,6 +5,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.awt.*;
+import java.io.IOException;
+
 
 public class LoginTests extends TestBase {
 
@@ -25,6 +28,17 @@ public class LoginTests extends TestBase {
         app.getUser().clickOnLoginButton();
         //Assert: User logged in
         Assert.assertTrue(app.getHeader().isContactTabPresent());
+    }
+
+    @Test
+    public void loginRegisteredUserPositiveTestWithScreenCast() throws IOException, AWTException {
+        app.getUser().deleteScreenCast("record");
+        app.getUser().startRecording();
+        app.getUser().fillRegistrationLoginForm(new User().setEmail("korner_15@mail.com").setPassword("Sd3567890$"));
+
+        app.getUser().clickOnLoginButton();
+        app.getUser().pause(4000);
+        app.getUser().stopRecording();
     }
 
     @Test(priority = 2)
