@@ -26,7 +26,7 @@ public class AddContactTests extends TestBase{
         Assert.assertTrue(app.getContact().isContactCreated("Korn"));
         app.getContact().removeContact();
     }
-    @Test(dataProvider = "newContact", dataProviderClass = DataProviders.class)
+    @Test(dataProvider = "newContact", dataProviderClass = DataProviders.class, enabled = false)
     public void addContactPositiveFromDataProviderTest(String name, String lastName, String phone, String email, String address, String desc) {
         app.getContact().addContact(new Contact().setName(name).setLastname(lastName).setPhone(phone)
                 .setEmail(email).setAddress(address).setDesc(desc));
@@ -34,7 +34,7 @@ public class AddContactTests extends TestBase{
         Assert.assertTrue(app.getContact().isContactCreated("Lukas"));
         app.getContact().removeContact();
 
-    }@Test(dataProvider = "newContactFromCVS", dataProviderClass = DataProviders.class)
+    }@Test(dataProvider = "newContactFromCVS", dataProviderClass = DataProviders.class, enabled = false)
     public void addContactPositiveFromDataProviderWithCVSTest(Contact contact) {
         app.getContact().addContact(contact);
 

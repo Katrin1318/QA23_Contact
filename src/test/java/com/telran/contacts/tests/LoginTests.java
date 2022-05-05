@@ -30,7 +30,7 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(app.getHeader().isContactTabPresent());
     }
 
-    @Test
+    @Test(enabled = false)
     public void loginRegisteredUserPositiveTestWithScreenCast() throws IOException, AWTException {
         app.getUser().deleteScreenCast("record");
         app.getUser().startRecording();
